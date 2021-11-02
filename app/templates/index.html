@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="{{ url_for('css', path='/styles.css') }}">
+    {% block styles %}{% endblock %}
+    {% block header_scripts %}{% endblock %}
+</head>
+<body>
+    <div class="container is-max-desktop">
+        <header class="header">
+            <section class="hero is-primary">
+                <div class="hero-body">
+                  <h1 class="title">
+                    {{ title }}
+                  </h1>
+                  <p class="subtitle">
+                    {{ subtitle }}
+                  </p>
+                </div>
+              </section>
+        </header>
+        <main class="main">
+            {% block main %}{% endblock %}
+        </main>
+        <footer class="footer py-5">
+            <div class="columns">
+            <section class="content column m-2 p-3 py-5">
+                <h3 class="title is-6">Attributions</h3>
+                <ul class="ml-3">
+                    {% for attribution in attributions %}
+                    <li class="is-size-7">{{ attribution|safe }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
