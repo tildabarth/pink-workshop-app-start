@@ -71,7 +71,7 @@ There are a few things we need to do before we can do that.
 - We must let FastAPI know *where* our **templates** are.
 - We also need to say *where* we keep our **static files** like images and stylesheets.
 - Finally, we need to return a `Jinja2Templates.TemplateResponse` instead of our basic `HTMLResponse`.<br>
-This also means that we need to create a `context` dictionary. It's a dictionary with all the keys and values we want to pass to our template. There is one mandatory key: `'requests'`. This **must** be present, and it must be a `fastapi.Request`. The request is passed in a parameter of the route function.
+This also means that we need to create a `context` dictionary. It's a dictionary with all the keys and values we want to pass to our template. There is one mandatory key: `'requests'`. This **must** be present, and it must be a `fastapi.Request` (which is really a `starlette.requests.Request`). The request is passed in a parameter of the route.
 
 ### Getting the Data
 
@@ -102,9 +102,9 @@ import time
 ...
 
 for run in runs:
-    shoe = schemas.Shoe(**requests.get(f'{API_BASE_URL}/shoes/{run.shoe_id}').json())
+    shoe_dict = requests.get(f'{API_BASE_URL}/shoes/{run.shoe_id}').json()
     if shoe:
-        run.shoe = shoe
+        run.shoe = schemas.Shoe(**shoe_dict)
     time.sleep(1)
 ```
 
