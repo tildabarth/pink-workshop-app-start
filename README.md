@@ -103,7 +103,7 @@ import time
 
 for run in runs:
     shoe_dict = requests.get(f'{API_BASE_URL}/shoes/{run.shoe_id}').json()
-    if shoe:
+    if shoe_dict:
         run.shoe = schemas.Shoe(**shoe_dict)
     time.sleep(1)
 ```
