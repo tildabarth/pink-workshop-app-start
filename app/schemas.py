@@ -47,7 +47,7 @@ class Run(BaseSchema):
         """Get pace as minutes and seconds per km."""
         """
         seconds_per_km = 60**2 / (self.speed * 3.6)
-        minutes, seconds = divmod(seconds_per_km, 60)
+        minutes, seconds = (round(value) for value in divmod(seconds_per_km, 60))
         return f'{minutes}\'{seconds}"'
         """
         return 'X\'Y"'
