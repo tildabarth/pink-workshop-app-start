@@ -42,13 +42,13 @@
         <article class="media">
           <div class="media-left">
             <figure class="image is-48x48">
-              <img src="{{ url_for('img', path='/shoes/' + run.shoe.color + '-shoes.png') }}" alt="{{ run.shoe.name }}">
+              <img src="{{ url_for('img', path='/shoes/' + (run.shoe.color or 'mixed') + '-shoes.png') }}" alt="{{ run.shoe.name }}">
             </figure>
           </div>
           <div class="media-content">
             <div class="content">
-                <span class="subtitle is-5">{% if run.shoe.primary %}<span class="has-text-info has-text-weight-bold is-size-5">*</span> {% endif %}{{ run.shoe.name }}</span> &mdash; <span class="is-size-6">{{ run.shoe.distance }} / 400 km</span>
-                <progress class="progress my-1 is-info" value="{{ run.shoe.distance }}" max="400">{{ run.shoe.distance }}/400 km</progress>
+                <span class="subtitle is-5">{% if run.shoe.primary %}<span class="has-text-info has-text-weight-bold is-size-5">*</span> {% endif %}{{ run.shoe.name }}</span> &mdash; <span class="is-size-6">{{ run.shoe.distance }} / {{ run.shoe.max_distance }} km</span>
+                <progress class="progress my-1 is-{{ run.shoe.status or 'info' }}" value="{{ run.shoe.distance }}" max="{{ run.shoe.max_distance }}">{{ run.shoe.distance }}/{{ run.shoe.max_distance }} km</progress>
             </div>
           </div>
         </article>
